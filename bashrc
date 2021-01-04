@@ -5,15 +5,36 @@
 # @param $2 Optional parameter -- in case of multiple hits, index of the one you want to open.
 #
 function svi() {
-	files=`find . -name $1` # Find all matches to file name
+	sfn vi $1 $2
+}
+
+#
+# Scans current subtree and cats a file.
+#
+# @param $1 File name.
+# @param $2 Optional parameter -- in case of multiple hits, index of the one you want to open.
+#
+function scat() {
+	sfn cat $1 $2
+}
+
+#
+# Scans current subtree and performs given function on a file.
+#
+# @param $1	Function.
+# @param $2	File name.
+# @param $3 Optional parameter -- in case of multiple hits, index of the one you want to use.
+#
+function sfn() {
+	files=`find . -name $2` # Find all matches to file name
 	array=($files) # Array-ify
 	n=${#array[@]}
 
 	if [ $n == 1 ]; then
-		vi $files
+		$1 $files
 	else
-		if [ $# == 2 ]; then
-			vi ${array[$2]}
+		if [ $# == 3 ]; then
+			$1 ${array[$3]}
 		else
 			echo "$n files found:"
 			echo "${files[0]}"
@@ -21,6 +42,12 @@ function svi() {
 	fi
 }
 
+#
+# Changes the console colour.
+#
+# @param $1	Colour (default to black if no colour is found).
+#			Use "list" to list all available colours
+#
 function colo() {
 	case $1 in
 	red)
@@ -31,6 +58,19 @@ function colo() {
 		;;
 	green)
 		c="#006300"
+		;;
+	olive)
+		c="#313100"
+		;;
+	purple)
+		c="#310031"
+		;;
+	turquoise)
+		c="#003131"
+		;;
+	list)
+		echo "black red blue green olive purple turquoise"
+		return
 		;;
 	*)
 		c="#000000"
