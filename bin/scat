@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Runs sfn cat.
+# @param $1	Name of the file to cat.
+# @param $2	Optional index -- in case of multiple hits, the 0-based index of the one you want to use.
+
+sfn cat $1 $2
+exit 0

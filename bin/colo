@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Changes the console colour.
+# @param $1	Colour (default to black if no colour is found).
+
+case $1 in
+	red)
+		c="#630000"
+		;;
+	blue)
+		c="#000063"
+		;;
+	green)
+		c="#006300"
+		;;
+	olive)
+		c="#313100"
+		;;
+	purple)
+		c="#310031"
+		;;
+	turquoise)
+		c="#003131"
+		;;
+	list)
+		echo "black red blue green olive purple turquoise"
+		return
+		;;
+	*)
+		c="#000000"
+		;;
+	esac
+
+echo -ne "\e]11;$c\a"
+
+exit 0

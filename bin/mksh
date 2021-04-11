@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Makes a shell script file.
+# @param $1	File.
+
+file=$1
+
+if [[ -f $file ]]; then
+	echo "File $file already exists"
+	exit 1
+fi
+
+echo "#!/bin/bash" > $file
+chmod 755 $file
+vi $file
+
+exit 0

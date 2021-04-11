@@ -1,3 +1,5 @@
+##! Deprecated. This is stuff is better in a bin dir. Keep for posterity.
+
 #
 # Scans current subtree and vims a file.
 #

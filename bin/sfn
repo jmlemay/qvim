@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Scans current subtree and performs given function on a file.
+# @param $1	Function.
+# @param $2	File name.
+# @param $3	Optional parameter -- in case of multiple hits, 0-based index of the one you want to use.
+
+files=`find . -name $2` # Find all matches to file name
+array=($files) # Array-ify
+n=${#array[@]}
+
+if [ $n == 1 ]; then
+	$1 $files
+else
+	if [ $# == 3 ]; then
+		$1 ${array[$3]}
+	else
+		echo "Found $n files:"
+		i=0
+
+		while [[ $i -lt $n ]]; do
+			echo "$i: ${array[i]}"
+			: $((i++))
+		done
+	fi
+fi
